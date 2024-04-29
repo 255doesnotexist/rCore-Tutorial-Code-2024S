@@ -40,6 +40,20 @@ pub fn print(args: fmt::Arguments) {
     Stdout.write_fmt(args).unwrap();
 }
 
+#[macro_export]
+macro_rules! print {
+    ($fmt: literal $(, $($arg: tt)+)?) => {
+        $crate::console::print(format_args!($fmt $(, $($arg)+)?));
+    }
+}
+
+#[macro_export]
+macro_rules! println {
+    ($fmt: literal $(, $($arg: tt)+)?) => {
+        print(format_args!(concat!($fmt, "\n") $(, $($arg)+)?));
+    }
+}
+
 #[no_mangle]
 extern "C" fn _start() {
     sys_exit(9);
