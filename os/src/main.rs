@@ -2,6 +2,8 @@
 #![no_main]
 mod lang_items;
 
+use core::fmt::{self, Write};
+
 const SYSCALL_EXIT: usize = 93;
 const SYSCALL_WRITE: usize = 64;
 
